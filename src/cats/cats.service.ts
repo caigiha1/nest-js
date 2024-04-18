@@ -11,4 +11,16 @@ export class CatsService {
   create(cat: string) {
     this.cats.push(cat);
   }
+
+  findOne(id: string): string {
+    return this.cats[id];
+  }
+
+  update(id: string): string {
+    return this.cats[id];
+  }
+
+  remove(id: string): string {
+    return this.cats[id];
+  }
 }
