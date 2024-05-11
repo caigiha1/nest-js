@@ -1,19 +1,29 @@
 import {
+  Body,
   Controller,
-  Delete,
   Get,
   HttpException,
   HttpStatus,
-  Param,
-  ParseIntPipe,
+  Inject,
   Post,
-  Put,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
+import { CreateSongDto } from './dto/create-song-dto';
+import { Connection } from '../common/constants/connection';
 
 @Controller('songs')
 export class SongsController {
-  constructor(private readonly songsService: SongsService) {}
+  constructor(
+    private readonly songsService: SongsService,
+    @Inject('CONNECTION')
+    private connection: Connection,
+  ) {
+    console.log(`This is connection string: ${this.connection}`);
+  }
+  @Post()
+  create(@Body() createSongDTO: CreateSongDto) {
+    return this.songsService.create(createSongDTO);
+  }
 
   @Get()
   findAll() {
@@ -28,31 +38,5 @@ export class SongsController {
         },
       );
     }
-  }
-
-  @Get(':id')
-  findOne(
-    @Param(
-      'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-    )
-    id: number,
-  ) {
-    return `this fetch song base provide ${typeof id}`;
-  }
-
-  @Post()
-  create() {
-    return this.songsService.create();
-  }
-
-  @Put(':id')
-  update(id: string) {
-    return this.songsService.update(id);
-  }
-
-  @Delete(':id')
-  remove(id: string) {
-    return this.songsService.remove(id);
   }
 }

@@ -1,0 +1,15 @@
+GET http://localhost:3000
+
+### GET SONGS REQUEST
+GET http://localhost:3000/songs
+
+### FIND SONGS REQUEST
+GET http://localhost:3000/songs/1
+
+### POST SONGS REQUEST
+POST http://localhost:3000/songs/1
+Content-Type: application/json
+
+{
+
+}
