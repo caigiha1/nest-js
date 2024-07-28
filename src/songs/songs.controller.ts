@@ -1,42 +1,49 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
-  HttpException,
-  HttpStatus,
-  Inject,
+  Param,
   Post,
+  Put,
+  Scope,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
+import { Song } from './songs.entity';
 import { CreateSongDto } from './dto/create-song-dto';
-import { Connection } from '../common/constants/connection';
+import { UpdateSongDto } from './dto/update-song-dto';
 
-@Controller('songs')
+@Controller({
+  path: 'songs',
+  scope: Scope.REQUEST,
+})
 export class SongsController {
-  constructor(
-    private readonly songsService: SongsService,
-    @Inject('CONNECTION')
-    private connection: Connection,
-  ) {
-    console.log(`This is connection string: ${this.connection}`);
+  constructor(private readonly songsService: SongsService) {}
+  @Get()
+  findAll(): Promise<Song[]> {
+    return this.songsService.findAll();
   }
+
+  @Get(':id')
+  findOne(@Param('id') id: number): Promise<Song> {
+    return this.songsService.findOne(id);
+  }
+
   @Post()
-  create(@Body() createSongDTO: CreateSongDto) {
+  create(@Body() createSongDTO: CreateSongDto): Promise<Song> {
     return this.songsService.create(createSongDTO);
   }
 
-  @Get()
-  findAll() {
-    try {
-      return this.songsService.findAll();
-    } catch (e) {
-      throw new HttpException(
-        'server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        {
-          cause: e.message,
-        },
-      );
-    }
+  @Put(':id')
+  update(
+    @Param('id') id: number,
+    @Body() updateSongDTO: UpdateSongDto,
+  ): Promise<void> {
+    return this.songsService.update(id, updateSongDTO);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number): Promise<void> {
+    return this.songsService.remove(id);
   }
 }

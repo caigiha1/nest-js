@@ -1,5 +1,5 @@
 export const connection: Connection = {
-  CONNECTION_STRING: 'CONNECTION_STRING',
+  CONNECTION_STRING: 'MYSQL://12324/sss',
   DB: 'MY_SQL',
   DBNAME: 'test',
 };

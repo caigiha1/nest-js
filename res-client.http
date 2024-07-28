@@ -7,9 +7,27 @@ GET http://localhost:3000/songs
 GET http://localhost:3000/songs/1
 
 ### POST SONGS REQUEST
-POST http://localhost:3000/songs/1
+POST http://localhost:3000/songs
 Content-Type: application/json
 
 {
-
+  "title": "You for Me 1",
+  "artists": ["Siagla", "Yan", "Ny"],
+  "releaseDate": "2022-09-30",
+  "duration": "02:45",
+  "lyrics": "Sby, you're my adrenaline. Brought out this other side of me You don't even know Controlling my whole anatomy, oh Fingers are holding you right atthe edge You're slipping out of my hands Keeping my secrets all up in my head I'mscared that you won't want me back, oh I dance to every song like it's about ya Idrink 'til I kiss someone who looks like ya I wish that I was honest when I had youI shoulda told you that I wanted you for me I dance to every song like it's aboutya I drink 'til I kiss someone who looks like ya"
 }
+
+
+### PUT SONGS REQUEST
+PUT http://localhost:3000/songs/1
+Content-Type: application/json
+
+{
+  "title": "You for Me 3",
+  "artists": ["Siagla"],
+  "releaseDate": "2022-09-30",
+  "duration": "02:45",
+  "lyrics": "Sby, you're my adrenaline. Brought out this other side of me Youdon't even know Controlling my whole anatomy, oh Fingers are holding you right atthe edge You're slipping out of my hands Keeping my secrets all up in my head I'mscared that you won't want me back, oh I dance to every song like it's about ya Idrink 'til I kiss someone who looks like ya I wish that I was honest when I had youI shoulda told you that I wanted you for me I dance to every song like it's aboutya I drink 'til I kiss someone who looks like ya"
+}
+
